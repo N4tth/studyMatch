@@ -1,13 +1,6 @@
-@tailwind base; @tailwind components; @tailwind utilities;
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-body {
-  @apply bg-gray-50 text-gray-800;
-}
-
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -36,10 +29,6 @@ a:hover {
 
 body {
   @apply bg-gray-50 text-gray-800;
-}
-
-
-body {
   margin: 0;
   display: flex;
   place-items: center;
@@ -59,7 +48,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #d32626;
   cursor: pointer;
   transition: border-color 0.25s;
 }
