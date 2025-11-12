@@ -6,11 +6,16 @@ import NavBar from "../components/NavBar";
 export default function Discover({ mockGroups, setSelectedGroup, appliedGroups }) {
   const [courseFilter, setCourseFilter] = useState("");
   const [techFilter, setTechFilter] = useState("");
+  const [degreeFilter, setDegreeFilter] = useState("");
+  const [uniFilter, setUniFilter] = useState("");
 
   const filteredGroups = mockGroups.filter((group) => {
     const courseMatch = group.course.toLowerCase().includes(courseFilter.toLowerCase());
     const techMatch = techFilter === "" || group.tech.some(t => t.toLowerCase().includes(techFilter.toLowerCase()));
-    return courseMatch && techMatch;
+    const degreeMatch = degreeFilter === "" || (group.degree && group.degree.toLowerCase().includes(degreeFilter.toLowerCase()));
+    const uniMatch = uniFilter === "" || (group.uni && group.uni.toLowerCase().includes(uniFilter.toLowerCase()));
+
+    return courseMatch && techMatch && degreeMatch && uniMatch;
   });
 
   return (
@@ -31,6 +36,20 @@ export default function Discover({ mockGroups, setSelectedGroup, appliedGroups }
               className="p-2 border rounded-md"
               value={techFilter}
               onChange={(e) => setTechFilter(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Filtrar por carrera"
+              className="p-2 border rounded-md"
+              value={degreeFilter}
+              onChange={(e) => setDegreeFilter(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Filtrar por universidad"
+              className="p-2 border rounded-md"
+              value={uniFilter}
+              onChange={(e) => setUniFilter(e.target.value)}
             />
           </div>
         </div>

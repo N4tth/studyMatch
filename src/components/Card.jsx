@@ -10,13 +10,15 @@ export default function Card({ group, setSelectedGroup, appliedGroups }) {
       <div className="flex-1">
         <h3 className="font-semibold text-lg">{group.title}</h3>
         <p className="text-sm text-gray-600">{group.course}</p>
-        <p className="mt-2 text-sm text-gray-700 line-clamp-3">{group.description}</p>
+        <p className="mt-2 text-sm text-gray-700">{group.description}</p>
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {group.tech.map((t) => (
             <span key={t} className="text-xs px-2 py-1 bg-indigo-50 text-indigo-700 rounded-full">{t}</span>
           ))}
           <span className="text-xs px-2 py-1 bg-green-50 text-green-700 rounded-full">{group.spots} spots</span>
         </div>
+        <p className="text-sm text-gray-600 mt-2">Carrera: {group.degree}</p>
+        <p className="text-sm text-gray-600">Universidad: {group.uni}</p>
       </div>
       <div className="flex flex-col items-end gap-2">
         <div className="text-sm text-gray-500">{group.schedule}</div>
