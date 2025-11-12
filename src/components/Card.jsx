@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Card({ group, setSelectedGroup }) {
+export default function Card({ group, setSelectedGroup, appliedGroups }) {
+  const hasApplied = appliedGroups.includes(group.id);
+
   return (
     <div className="bg-white rounded-2xl shadow-md p-4 flex flex-col sm:flex-row gap-4">
       <div className="w-full sm:w-32 h-24 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">Img</div>
@@ -26,13 +28,24 @@ export default function Card({ group, setSelectedGroup }) {
           >
             Ver
           </Link>
-          <Link
-            to="/apply"
-            onClick={() => setSelectedGroup(group)}
-            className="px-3 py-1 rounded-md border border-indigo-200 text-indigo-700 text-sm"
-          >
-            Aplicar
-          </Link>
+          {hasApplied ? (
+            <Link
+              to="/chat"
+              state={{ group }}
+              className="px-3 py-1 rounded-md border border-indigo-200 text-indigo-700 text-sm"
+            >
+              Chat
+            </Link>
+          ) : (
+            <Link
+              to="/apply"
+              state={{ group }}
+              onClick={() => setSelectedGroup(group)}
+              className="px-3 py-1 rounded-md border border-indigo-200 text-indigo-700 text-sm"
+            >
+              Aplicar
+            </Link>
+          )}
         </div>
       </div>
     </div>

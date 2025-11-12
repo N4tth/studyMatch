@@ -14,6 +14,7 @@ import NavBar from "./components/NavBar";
 export default function App() {
   const [user, setUser] = useState({ name: "Alex", degree: "Ingeniería de sistemas", uni: "Universidad del Valle" });
   const [selectedGroup, setSelectedGroup] = useState(null);
+  const [appliedGroups, setAppliedGroups] = useState([]);
 
   const [logged, setLogged] = useState(true);
   
@@ -42,6 +43,10 @@ export default function App() {
     },
   ];
 
+  const handleApply = (group) => {
+    setAppliedGroups([...appliedGroups, group.id]);
+  };
+
   return (
     <div className="font-sans text-gray-800">
       <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white flex flex-col">
@@ -50,12 +55,12 @@ export default function App() {
         <Route path="/" element={<Landing login={logged} />} />
         <Route path="/login" element={<Auth mode="login" />} />
         <Route path="/register" element={<Auth mode="register" />} />
-        <Route path="/discover" element={<Discover mockGroups={mockGroups} setSelectedGroup={setSelectedGroup} />} />
-        <Route path="/group" element={<GroupView group={selectedGroup} />} />
+        <Route path="/discover" element={<Discover mockGroups={mockGroups} setSelectedGroup={setSelectedGroup} appliedGroups={appliedGroups} />} />
+        <Route path="/group" element={<GroupView group={selectedGroup} handleApply={handleApply} appliedGroups={appliedGroups} />} />
         <Route path="/create" element={<CreateGroup />} />
         <Route path="/profile" element={<Profile user={user} />} />
         <Route path="/chat" element={<Chat />} />
-        <Route path="/apply" element={<ApplyFlow />} />
+        <Route path="/apply" element={<ApplyFlow handleApply={handleApply} />} />
       </Routes>
       </div>
 

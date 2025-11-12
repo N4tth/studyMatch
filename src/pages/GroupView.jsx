@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function GroupView({ group }) {
+export default function GroupView({ group, appliedGroups }) {
   if (!group) return null;
+
+  const hasApplied = appliedGroups.includes(group.id);
+
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="max-w-3xl mx-auto">
@@ -22,7 +25,11 @@ export default function GroupView({ group }) {
 
               <div className="mt-4 flex items-center gap-3">
                 <Link to="/chat" className="px-3 py-1 bg-indigo-600 text-white rounded-md">Enviar Mensaje</Link>
-                <Link to="/apply" className="px-3 py-1 border rounded-md">Aplicar al Grupo</Link>
+                {hasApplied ? (
+                  <Link to="/chat" state={{ group }} className="px-3 py-1 border rounded-md">Ir al Chat</Link>
+                ) : (
+                  <Link to="/apply" state={{ group }} className="px-3 py-1 border rounded-md">Aplicar al Grupo</Link>
+                )}
               </div>
             </div>
           </div>

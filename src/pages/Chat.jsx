@@ -1,14 +1,18 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Chat() {
+  const location = useLocation();
+  const { group } = location.state || {};
+
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="max-w-3xl mx-auto bg-white rounded-2xl p-4 shadow flex flex-col h-[80vh]">
         <div className="flex items-center gap-3 border-b pb-3">
           <div className="w-12 h-12 bg-gray-100 rounded-full" />
           <div>
-            <div className="font-semibold">Isabella Rossi</div>
-            <div className="text-sm text-gray-500">Ingenieria de Sistemas, 4to semestre</div>
+            <div className="font-semibold">{group ? `Chat Grupal - ${group.title}` : "Chat"}</div>
+            <div className="text-sm text-gray-500">{group ? group.course : ""}</div>
           </div>
         </div>
         <div className="flex-1 overflow-auto p-3">
